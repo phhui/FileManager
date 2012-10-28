@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("FileManager")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("文件管理辅助工具")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("phhui")]
 [assembly: AssemblyProduct("FileManager")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © phhui 2012")]
+[assembly: AssemblyTrademark("phhui")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型
