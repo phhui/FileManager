@@ -22,10 +22,6 @@ namespace FileManager
         {
             InitializeComponent();
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
         public List<FileInfo> GetAllFilesInDirectory(string strDirectory)
         {
             if(!Directory.Exists(strDirectory)){
@@ -100,61 +96,53 @@ namespace FileManager
         private void textBox1_Click(object sender, EventArgs e)
         {
 
-            FolderBrowserDialog fb = new FolderBrowserDialog();
-            fb.ShowNewFolderButton = true;
-            if (fb.ShowDialog() == DialogResult.OK)
-            {
-                mobilePath.Text = fb.SelectedPath;
-            }
+            
         }
         //移动文件
         private void btn_mobileFile_Click(object sender, EventArgs e)
         {
-            if (list_changedFileList.Items.Count < 1)
+            DialogResult res = MessageBox.Show("您确定要移动选择列表中的所有文件？","提示",MessageBoxButtons.YesNo);
+            if (res != DialogResult.Yes) return;
+            FolderBrowserDialog fb = new FolderBrowserDialog();
+            fb.ShowNewFolderButton = true;
+            if (fb.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("您还未选择任何文件！");
-            }
-            else if (mobilePath.Text.Length < 1 || mobilePath.Text == "点击此处选择移动目标")
-            {
-                MessageBox.Show("请选择目标路径，点击左边的文本框进行选择！");
-            }
-            else if (!Directory.Exists(mobilePath.Text))
-            {
-                MessageBox.Show("目标路径不存在！");
-            }
-            else
-            {
-                mobilePath.Enabled = false;
-                mobileFile();
+                if (list_changedFileList.Items.Count < 1)
+                {
+                    MessageBox.Show("您还未选择任何文件！");
+                }
+                else
+                {
+                    mobileFile(fb.SelectedPath);
+                }
             }
         }
         //将选择的文件移动到指定目录
-        private void mobileFile()
+        private void mobileFile(string mobilePath)
         {
             foreach (string path in list_changedFileList.Items)
             {
                 if (File.Exists(path))
                 {
                     string filename=path.Substring(path.LastIndexOf("\\"));
-                    if (!File.Exists(mobilePath.Text + filename))
+                    if (!File.Exists(mobilePath + filename))
                     {
-                        File.Move(path, mobilePath.Text+filename);//将文件移动到目标目录下
+                        File.Move(path, mobilePath + filename);//将文件移动到目标目录下
                         moveNum++;
                     }
                     else
                     {
-                        DialogResult result=MessageBox.Show("文件" + filename + "在" + mobilePath.Text + "已存在，是否替换？", "提示", MessageBoxButtons.YesNo);
-                        if (result==DialogResult.OK)
+                        DialogResult result=MessageBox.Show("文件" + filename + "在" + mobilePath + "已存在，是否替换？", "提示", MessageBoxButtons.YesNo);
+                        if (result==DialogResult.Yes)
                         {
-                            File.Delete(mobilePath.Text+filename);//删除目标目录下对应的文件
-                            File.Move(path, mobilePath.Text + filename);//将文件移动到目标目录下
+                            File.Delete(mobilePath+filename);//删除目标目录下对应的文件
+                            File.Move(path, mobilePath + filename);//将文件移动到目标目录下
                             moveNum++;
                         }
                     }
                 }
             }
             list_changedFileList.Items.Clear();
-            mobilePath.Enabled = true;
             MessageBox.Show("文件移动完成！总共"+moveNum.ToString()+"个文件被移动！");
         }
         //清空选择列表
@@ -199,13 +187,22 @@ namespace FileManager
                 return;
             }
             list_fileList.Items.Clear();
+            string[] str = txt_containsText.Text.Replace("，",",").Split(',');
             foreach (FileInfo fi in fileListData)
             {
-                if (checkBox1.Checked && fi.Name.Contains(txt_containsText.Text))//包含指定字符的文件
+                Boolean res = false;
+                foreach (string s in str)
+                {
+                    if (fi.Name.Contains(s))
+                    {
+                        res = true;
+                    }
+                }
+                if (checkBox1.Checked && res)//包含指定字符的文件
                 {
                     list_fileList.Items.Add(fi.FullName);
                 }
-                else if (!checkBox1.Checked && !fi.Name.Contains(txt_containsText.Text))//不包含指定字符的文件
+                else if (!checkBox1.Checked && !res)//不包含指定字符的文件
                 {
                     list_fileList.Items.Add(fi.FullName);
                 }
@@ -227,6 +224,73 @@ namespace FileManager
             {
                 txt_containsText.Text = "";
             }
+        }
+
+        private void btn_reName_Click(object sender, EventArgs e)
+        {
+            if (list_changedFileList.Items.Count > 1)
+            {
+                MessageBox.Show("重命名只能对单个文件重命名！如需对多个文件重命名请使用序列重命名！");
+                return;
+            }
+            if (txt_newFileName.Text.Length < 1)
+            {
+                MessageBox.Show("请输入新的文件名！");
+                return;
+            }
+            string filePath = list_changedFileList.Items[0].ToString().Substring(0,list_changedFileList.Items[0].ToString().LastIndexOf("\\")+1);
+            string filename = list_changedFileList.Items[0].ToString().Substring(list_changedFileList.Items[0].ToString().LastIndexOf("\\") + 1);
+            string type = filename.Substring(filename.LastIndexOf("."));
+            txt_debug.Text = filePath + "\r\n" + filename + "\r\n" + type;
+            DialogResult res = MessageBox.Show("您确定要将【" + filename + "】重命名为【 " + txt_newFileName.Text + type + " 】?", "提示", MessageBoxButtons.YesNo);
+            if (res == DialogResult.Yes)
+            {
+                File.Move(list_changedFileList.Items[0].ToString(), filePath + txt_newFileName.Text + type);
+                list_changedFileList.Items.Clear();
+                list_changedFileList.Items.Add(filePath + txt_newFileName.Text + type);
+                MessageBox.Show("重命名完成！");
+            }
+        }
+
+        private void btn_allReName_Click(object sender, EventArgs e)
+        {
+            if (txt_order.Text.Length < 1)
+            {
+                MessageBox.Show("请输入序列名字！");
+                return;
+            }
+            int a = 0;
+            if (!int.TryParse(txt_orderStartNum.Text,out a))
+            {
+                MessageBox.Show("起始序号只能为数字！");
+                return;
+            }
+            int i=Convert.ToInt32(txt_orderStartNum.Text);
+            string[] newFile=new string[list_changedFileList.Items.Count];
+            int j = 0;
+            foreach (string s in list_changedFileList.Items)
+            {
+                string filePath = s.Substring(0, s.LastIndexOf("\\") + 1);
+                string filename = s.Substring(s.LastIndexOf("\\") + 1);
+                string type = filename.Substring(filename.LastIndexOf("."));
+                if (File.Exists(filePath + txt_order.Text + i.ToString() + type))
+                {
+                    File.Move(s, filePath + txt_order.Text + i.ToString()+"(1)" + type);
+                    newFile[j] = filePath + txt_order.Text + i.ToString() + "(1)" + type;
+                }
+                else
+                {
+                    File.Move(s, filePath + txt_order.Text + i.ToString() + type);
+                    newFile[j] = filePath + txt_order.Text + i.ToString() + type;
+                }
+                i++;
+                j++;
+            }
+            list_changedFileList.Items.Clear();
+            foreach(string nf in newFile){
+                list_changedFileList.Items.Add(nf);
+            }
+            MessageBox.Show("序列重命名完成！");
         }
     }
 }

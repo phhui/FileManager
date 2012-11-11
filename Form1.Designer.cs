@@ -38,8 +38,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.deleteFile = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.mobilePath = new System.Windows.Forms.TextBox();
             this.btn_mobileFile = new System.Windows.Forms.Button();
             this.btn_clearChange = new System.Windows.Forms.Button();
             this.btn_refreshFileList = new System.Windows.Forms.Button();
@@ -47,6 +45,18 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.txt_containsText = new System.Windows.Forms.TextBox();
             this.btn_filter = new System.Windows.Forms.Button();
+            this.txt_newFileName = new System.Windows.Forms.TextBox();
+            this.btn_reName = new System.Windows.Forms.Button();
+            this.btn_addPrefix = new System.Windows.Forms.Button();
+            this.btn_addSuffix = new System.Windows.Forms.Button();
+            this.txt_order = new System.Windows.Forms.TextBox();
+            this.txt_char = new System.Windows.Forms.TextBox();
+            this.btn_allReName = new System.Windows.Forms.Button();
+            this.txt_orderStartNum = new System.Windows.Forms.TextBox();
+            this.txt_fileChar = new System.Windows.Forms.TextBox();
+            this.txt_useChar = new System.Windows.Forms.TextBox();
+            this.btn_replace = new System.Windows.Forms.Button();
+            this.txt_debug = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // filePath
@@ -102,7 +112,7 @@
             this.list_changedFileList.ItemHeight = 12;
             this.list_changedFileList.Location = new System.Drawing.Point(263, 56);
             this.list_changedFileList.Name = "list_changedFileList";
-            this.list_changedFileList.Size = new System.Drawing.Size(209, 412);
+            this.list_changedFileList.Size = new System.Drawing.Size(209, 424);
             this.list_changedFileList.TabIndex = 8;
             this.list_changedFileList.SelectedIndexChanged += new System.EventHandler(this.changedFileList_SelectedIndexChanged);
             // 
@@ -126,39 +136,21 @@
             // 
             // deleteFile
             // 
-            this.deleteFile.Location = new System.Drawing.Point(388, 474);
+            this.deleteFile.Location = new System.Drawing.Point(62, 484);
             this.deleteFile.Name = "deleteFile";
-            this.deleteFile.Size = new System.Drawing.Size(82, 23);
+            this.deleteFile.Size = new System.Drawing.Size(46, 23);
             this.deleteFile.TabIndex = 11;
-            this.deleteFile.Text = "删除选中文件";
+            this.deleteFile.Text = "删除";
             this.deleteFile.UseVisualStyleBackColor = true;
             this.deleteFile.Click += new System.EventHandler(this.deleteFile_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 479);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "移动到";
-            // 
-            // mobilePath
-            // 
-            this.mobilePath.Location = new System.Drawing.Point(53, 474);
-            this.mobilePath.Name = "mobilePath";
-            this.mobilePath.Size = new System.Drawing.Size(248, 21);
-            this.mobilePath.TabIndex = 13;
-            this.mobilePath.Text = "点击此处选择移动目标";
-            this.mobilePath.Click += new System.EventHandler(this.textBox1_Click);
-            // 
             // btn_mobileFile
             // 
-            this.btn_mobileFile.Location = new System.Drawing.Point(307, 474);
+            this.btn_mobileFile.Location = new System.Drawing.Point(8, 484);
             this.btn_mobileFile.Name = "btn_mobileFile";
-            this.btn_mobileFile.Size = new System.Drawing.Size(75, 23);
+            this.btn_mobileFile.Size = new System.Drawing.Size(48, 23);
             this.btn_mobileFile.TabIndex = 14;
-            this.btn_mobileFile.Text = "移  动";
+            this.btn_mobileFile.Text = "移动";
             this.btn_mobileFile.UseVisualStyleBackColor = true;
             this.btn_mobileFile.Click += new System.EventHandler(this.btn_mobileFile_Click);
             // 
@@ -195,7 +187,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 451);
+            this.checkBox1.Location = new System.Drawing.Point(8, 449);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBox1.Size = new System.Drawing.Size(48, 16);
@@ -205,16 +197,16 @@
             // 
             // txt_containsText
             // 
-            this.txt_containsText.Location = new System.Drawing.Point(66, 447);
+            this.txt_containsText.Location = new System.Drawing.Point(62, 445);
             this.txt_containsText.Name = "txt_containsText";
             this.txt_containsText.Size = new System.Drawing.Size(136, 21);
             this.txt_containsText.TabIndex = 19;
-            this.txt_containsText.Text = "过滤的字符串";
+            this.txt_containsText.Text = "过滤的字符串,逗号隔开";
             this.txt_containsText.Click += new System.EventHandler(this.txt_containsText_Click);
             // 
             // btn_filter
             // 
-            this.btn_filter.Location = new System.Drawing.Point(208, 447);
+            this.btn_filter.Location = new System.Drawing.Point(208, 445);
             this.btn_filter.Name = "btn_filter";
             this.btn_filter.Size = new System.Drawing.Size(49, 23);
             this.btn_filter.TabIndex = 20;
@@ -222,11 +214,127 @@
             this.btn_filter.UseVisualStyleBackColor = true;
             this.btn_filter.Click += new System.EventHandler(this.btn_filter_Click);
             // 
+            // txt_newFileName
+            // 
+            this.txt_newFileName.Location = new System.Drawing.Point(8, 513);
+            this.txt_newFileName.Name = "txt_newFileName";
+            this.txt_newFileName.Size = new System.Drawing.Size(107, 21);
+            this.txt_newFileName.TabIndex = 21;
+            this.txt_newFileName.Text = "新的文件名";
+            // 
+            // btn_reName
+            // 
+            this.btn_reName.Location = new System.Drawing.Point(121, 513);
+            this.btn_reName.Name = "btn_reName";
+            this.btn_reName.Size = new System.Drawing.Size(57, 23);
+            this.btn_reName.TabIndex = 22;
+            this.btn_reName.Text = "重命名";
+            this.btn_reName.UseVisualStyleBackColor = true;
+            this.btn_reName.Click += new System.EventHandler(this.btn_reName_Click);
+            // 
+            // btn_addPrefix
+            // 
+            this.btn_addPrefix.Location = new System.Drawing.Point(121, 570);
+            this.btn_addPrefix.Name = "btn_addPrefix";
+            this.btn_addPrefix.Size = new System.Drawing.Size(54, 23);
+            this.btn_addPrefix.TabIndex = 23;
+            this.btn_addPrefix.Text = "加前缀";
+            this.btn_addPrefix.UseVisualStyleBackColor = true;
+            // 
+            // btn_addSuffix
+            // 
+            this.btn_addSuffix.Location = new System.Drawing.Point(180, 570);
+            this.btn_addSuffix.Name = "btn_addSuffix";
+            this.btn_addSuffix.Size = new System.Drawing.Size(51, 23);
+            this.btn_addSuffix.TabIndex = 24;
+            this.btn_addSuffix.Text = "加后缀";
+            this.btn_addSuffix.UseVisualStyleBackColor = true;
+            // 
+            // txt_order
+            // 
+            this.txt_order.Location = new System.Drawing.Point(8, 542);
+            this.txt_order.Name = "txt_order";
+            this.txt_order.Size = new System.Drawing.Size(107, 21);
+            this.txt_order.TabIndex = 25;
+            this.txt_order.Text = "序列名";
+            // 
+            // txt_char
+            // 
+            this.txt_char.Location = new System.Drawing.Point(8, 570);
+            this.txt_char.Name = "txt_char";
+            this.txt_char.Size = new System.Drawing.Size(107, 21);
+            this.txt_char.TabIndex = 26;
+            this.txt_char.Text = "字符串";
+            // 
+            // btn_allReName
+            // 
+            this.btn_allReName.Location = new System.Drawing.Point(227, 542);
+            this.btn_allReName.Name = "btn_allReName";
+            this.btn_allReName.Size = new System.Drawing.Size(75, 23);
+            this.btn_allReName.TabIndex = 27;
+            this.btn_allReName.Text = "序列重命名";
+            this.btn_allReName.UseVisualStyleBackColor = true;
+            this.btn_allReName.Click += new System.EventHandler(this.btn_allReName_Click);
+            // 
+            // txt_orderStartNum
+            // 
+            this.txt_orderStartNum.Location = new System.Drawing.Point(121, 543);
+            this.txt_orderStartNum.Name = "txt_orderStartNum";
+            this.txt_orderStartNum.Size = new System.Drawing.Size(100, 21);
+            this.txt_orderStartNum.TabIndex = 28;
+            this.txt_orderStartNum.Text = "0";
+            // 
+            // txt_fileChar
+            // 
+            this.txt_fileChar.Location = new System.Drawing.Point(8, 598);
+            this.txt_fileChar.Name = "txt_fileChar";
+            this.txt_fileChar.Size = new System.Drawing.Size(107, 21);
+            this.txt_fileChar.TabIndex = 29;
+            this.txt_fileChar.Text = "文件名中的字符";
+            // 
+            // txt_useChar
+            // 
+            this.txt_useChar.Location = new System.Drawing.Point(121, 598);
+            this.txt_useChar.Name = "txt_useChar";
+            this.txt_useChar.Size = new System.Drawing.Size(100, 21);
+            this.txt_useChar.TabIndex = 30;
+            this.txt_useChar.Text = "替换后的字符";
+            // 
+            // btn_replace
+            // 
+            this.btn_replace.Location = new System.Drawing.Point(227, 596);
+            this.btn_replace.Name = "btn_replace";
+            this.btn_replace.Size = new System.Drawing.Size(75, 23);
+            this.btn_replace.TabIndex = 31;
+            this.btn_replace.Text = "替 换";
+            this.btn_replace.UseVisualStyleBackColor = true;
+            // 
+            // txt_debug
+            // 
+            this.txt_debug.Location = new System.Drawing.Point(302, 487);
+            this.txt_debug.Multiline = true;
+            this.txt_debug.Name = "txt_debug";
+            this.txt_debug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_debug.Size = new System.Drawing.Size(170, 147);
+            this.txt_debug.TabIndex = 32;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 562);
+            this.ClientSize = new System.Drawing.Size(484, 636);
+            this.Controls.Add(this.txt_debug);
+            this.Controls.Add(this.btn_replace);
+            this.Controls.Add(this.txt_useChar);
+            this.Controls.Add(this.txt_fileChar);
+            this.Controls.Add(this.txt_orderStartNum);
+            this.Controls.Add(this.btn_allReName);
+            this.Controls.Add(this.txt_char);
+            this.Controls.Add(this.txt_order);
+            this.Controls.Add(this.btn_addSuffix);
+            this.Controls.Add(this.btn_addPrefix);
+            this.Controls.Add(this.btn_reName);
+            this.Controls.Add(this.txt_newFileName);
             this.Controls.Add(this.btn_filter);
             this.Controls.Add(this.txt_containsText);
             this.Controls.Add(this.checkBox1);
@@ -234,8 +342,6 @@
             this.Controls.Add(this.btn_refreshFileList);
             this.Controls.Add(this.btn_clearChange);
             this.Controls.Add(this.btn_mobileFile);
-            this.Controls.Add(this.mobilePath);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.deleteFile);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -248,7 +354,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "文件管理辅助工具";
+            this.Text = "文件管理辅助工具 by phhui";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,8 +371,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button deleteFile;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox mobilePath;
         private System.Windows.Forms.Button btn_mobileFile;
         private System.Windows.Forms.Button btn_clearChange;
         private System.Windows.Forms.Button btn_refreshFileList;
@@ -274,6 +378,18 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox txt_containsText;
         private System.Windows.Forms.Button btn_filter;
+        private System.Windows.Forms.TextBox txt_newFileName;
+        private System.Windows.Forms.Button btn_reName;
+        private System.Windows.Forms.Button btn_addPrefix;
+        private System.Windows.Forms.Button btn_addSuffix;
+        private System.Windows.Forms.TextBox txt_order;
+        private System.Windows.Forms.TextBox txt_char;
+        private System.Windows.Forms.Button btn_allReName;
+        private System.Windows.Forms.TextBox txt_orderStartNum;
+        private System.Windows.Forms.TextBox txt_fileChar;
+        private System.Windows.Forms.TextBox txt_useChar;
+        private System.Windows.Forms.Button btn_replace;
+        private System.Windows.Forms.TextBox txt_debug;
     }
 }
 
