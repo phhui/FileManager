@@ -56,7 +56,6 @@
             this.txt_fileChar = new System.Windows.Forms.TextBox();
             this.txt_useChar = new System.Windows.Forms.TextBox();
             this.btn_replace = new System.Windows.Forms.Button();
-            this.txt_debug = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // filePath
@@ -240,6 +239,7 @@
             this.btn_addPrefix.TabIndex = 23;
             this.btn_addPrefix.Text = "加前缀";
             this.btn_addPrefix.UseVisualStyleBackColor = true;
+            this.btn_addPrefix.Click += new System.EventHandler(this.btn_addPrefix_Click);
             // 
             // btn_addSuffix
             // 
@@ -249,6 +249,7 @@
             this.btn_addSuffix.TabIndex = 24;
             this.btn_addSuffix.Text = "加后缀";
             this.btn_addSuffix.UseVisualStyleBackColor = true;
+            this.btn_addSuffix.Click += new System.EventHandler(this.btn_addSuffix_Click);
             // 
             // txt_order
             // 
@@ -308,22 +309,13 @@
             this.btn_replace.TabIndex = 31;
             this.btn_replace.Text = "替 换";
             this.btn_replace.UseVisualStyleBackColor = true;
-            // 
-            // txt_debug
-            // 
-            this.txt_debug.Location = new System.Drawing.Point(302, 487);
-            this.txt_debug.Multiline = true;
-            this.txt_debug.Name = "txt_debug";
-            this.txt_debug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_debug.Size = new System.Drawing.Size(170, 147);
-            this.txt_debug.TabIndex = 32;
+            this.btn_replace.Click += new System.EventHandler(this.btn_replace_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 636);
-            this.Controls.Add(this.txt_debug);
             this.Controls.Add(this.btn_replace);
             this.Controls.Add(this.txt_useChar);
             this.Controls.Add(this.txt_fileChar);
@@ -389,7 +381,6 @@
         private System.Windows.Forms.TextBox txt_fileChar;
         private System.Windows.Forms.TextBox txt_useChar;
         private System.Windows.Forms.Button btn_replace;
-        private System.Windows.Forms.TextBox txt_debug;
     }
 }
 

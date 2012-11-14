@@ -238,22 +238,37 @@ namespace FileManager
                 MessageBox.Show("请输入新的文件名！");
                 return;
             }
-            string filePath = list_changedFileList.Items[0].ToString().Substring(0,list_changedFileList.Items[0].ToString().LastIndexOf("\\")+1);
-            string filename = list_changedFileList.Items[0].ToString().Substring(list_changedFileList.Items[0].ToString().LastIndexOf("\\") + 1);
+            string file = list_changedFileList.Items[0].ToString();
+            string filePath = file.Substring(0, list_changedFileList.Items[0].ToString().LastIndexOf("\\") + 1);
+            string filename = file.Substring(file.LastIndexOf("\\") + 1);
             string type = filename.Substring(filename.LastIndexOf("."));
-            txt_debug.Text = filePath + "\r\n" + filename + "\r\n" + type;
-            DialogResult res = MessageBox.Show("您确定要将【" + filename + "】重命名为【 " + txt_newFileName.Text + type + " 】?", "提示", MessageBoxButtons.YesNo);
-            if (res == DialogResult.Yes)
+            reName(list_changedFileList.Items[0].ToString(), txt_newFileName.Text, true);
+            list_changedFileList.Items.Clear();
+            list_changedFileList.Items.Add(filePath + txt_newFileName.Text + type);
+            MessageBox.Show("重命名完成！");
+        }
+        private void reName(string file,string newName,Boolean check)
+        {
+            string filePath = file.Substring(0, list_changedFileList.Items[0].ToString().LastIndexOf("\\") + 1);
+            string filename = file.Substring(file.LastIndexOf("\\") + 1);
+            string type = filename.Substring(filename.LastIndexOf("."));
+            DialogResult res=DialogResult.No;
+            if (check == true)
             {
-                File.Move(list_changedFileList.Items[0].ToString(), filePath + txt_newFileName.Text + type);
-                list_changedFileList.Items.Clear();
-                list_changedFileList.Items.Add(filePath + txt_newFileName.Text + type);
-                MessageBox.Show("重命名完成！");
+                res = MessageBox.Show("您确定要将【" + filename + "】重命名为【 " + newName + type + " 】?", "提示", MessageBoxButtons.YesNo);
+            }
+            if (!check||res == DialogResult.Yes)
+            {//需要检测是否存在新的文件名的文件
+                File.Move(file, filePath + newName + type);
             }
         }
-
         private void btn_allReName_Click(object sender, EventArgs e)
         {
+            if (list_changedFileList.Items.Count < 1)
+            {
+                MessageBox.Show("请先选择要操作的文件！");
+                return;
+            }
             if (txt_order.Text.Length < 1)
             {
                 MessageBox.Show("请输入序列名字！");
@@ -291,6 +306,89 @@ namespace FileManager
                 list_changedFileList.Items.Add(nf);
             }
             MessageBox.Show("序列重命名完成！");
+        }
+
+        private void btn_addPrefix_Click(object sender, EventArgs e)
+        {
+            if (list_changedFileList.Items.Count < 1)
+            {
+                MessageBox.Show("请先选择要操作的文件！");
+                return;
+            }
+            int j = 0;
+            string[] newFile = new string[list_changedFileList.Items.Count];
+            foreach (string s in list_changedFileList.Items)
+            {
+                string filePath = s.Substring(0, s.LastIndexOf("\\") + 1);
+                string filename = s.Substring(s.LastIndexOf("\\") + 1);
+                string type = filename.Substring(filename.LastIndexOf("."));
+                reName(s, filePath + txt_char.Text + filename, false);
+                newFile[j] = filePath + txt_char.Text + filename;
+                j++;
+            }
+            list_changedFileList.Items.Clear();
+            foreach (string nf in newFile)
+            {
+                list_changedFileList.Items.Add(nf);
+            }
+
+        }
+
+        private void btn_addSuffix_Click(object sender, EventArgs e)
+        {
+            if (list_changedFileList.Items.Count < 1)
+            {
+                MessageBox.Show("请先选择要操作的文件！");
+                return;
+            }
+            int j = 0;
+            string[] newFile = new string[list_changedFileList.Items.Count];
+            foreach (string s in list_changedFileList.Items)
+            {
+                string filePath = s.Substring(0, s.LastIndexOf("\\") + 1);
+                string filename = s.Substring(s.LastIndexOf("\\") + 1);
+                string type = filename.Substring(filename.LastIndexOf("."));
+                reName(s, filePath + filename.Replace(type, "") + txt_char.Text + type, false);
+                newFile[j] = filePath + filename.Replace(type, "") + txt_char.Text + type;
+                j++;
+            }
+            list_changedFileList.Items.Clear();
+            foreach (string nf in newFile)
+            {
+                list_changedFileList.Items.Add(nf);
+            }
+        }
+
+        private void btn_replace_Click(object sender, EventArgs e)
+        {
+
+            if (list_changedFileList.Items.Count < 1)
+            {
+                MessageBox.Show("请先选择要操作的文件！");
+                return;
+            }
+            if (txt_fileChar.Text.Length < 1)
+            {
+                MessageBox.Show("请填写要替换的内容！");
+                return;
+            }
+            int j = 0;
+            string[] newFile = new string[list_changedFileList.Items.Count];
+            foreach (string s in list_changedFileList.Items)
+            {
+                string filePath = s.Substring(0, s.LastIndexOf("\\") + 1);
+                string filename = s.Substring(s.LastIndexOf("\\") + 1);
+                string type = filename.Substring(filename.LastIndexOf("."));
+                string useChar = txt_useChar.Text.Length < 1 ? "" : txt_useChar.Text;
+                reName(s, filename.Replace(type, "").Replace(txt_fileChar.Text, useChar), false);
+                newFile[j] = filePath + filename.Replace(type, "").Replace(txt_fileChar.Text, useChar) + type;
+                j++;
+            }
+            list_changedFileList.Items.Clear();
+            foreach (string nf in newFile)
+            {
+                list_changedFileList.Items.Add(nf);
+            }
         }
     }
 }
