@@ -12,7 +12,7 @@
     <AssemblyName>FileManager</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>hui.ico</ApplicationIcon>
+    <ApplicationIcon>173-羞涩清风.ico</ApplicationIcon>
     <SignManifests>false</SignManifests>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -101,6 +101,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="173-羞涩清风.ico" />
     <Content Include="hui.ico" />
   </ItemGroup>
   <ItemGroup>

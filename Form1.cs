@@ -21,6 +21,7 @@ namespace FileManager
         public Form1()
         {
             InitializeComponent();
+            txt_info.Text = "功能已完成，欢迎试用\r\n\r\n使用中发现什么问题或是有什么意见建议欢迎咨询QQ:412035160";
         }
         public List<FileInfo> GetAllFilesInDirectory(string strDirectory,Boolean contains)
         {

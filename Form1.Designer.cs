@@ -58,6 +58,7 @@
             this.cb_contains = new System.Windows.Forms.CheckBox();
             this.txt_select = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.txt_info = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // filePath
@@ -328,11 +329,22 @@
             this.txt_select.Size = new System.Drawing.Size(463, 21);
             this.txt_select.TabIndex = 33;
             // 
+            // txt_info
+            // 
+            this.txt_info.Location = new System.Drawing.Point(319, 504);
+            this.txt_info.Multiline = true;
+            this.txt_info.Name = "txt_info";
+            this.txt_info.ReadOnly = true;
+            this.txt_info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_info.Size = new System.Drawing.Size(153, 143);
+            this.txt_info.TabIndex = 34;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 636);
+            this.ClientSize = new System.Drawing.Size(484, 659);
+            this.Controls.Add(this.txt_info);
             this.Controls.Add(this.txt_select);
             this.Controls.Add(this.cb_contains);
             this.Controls.Add(this.btn_replace);
@@ -399,6 +411,7 @@
         private System.Windows.Forms.CheckBox cb_contains;
         private System.Windows.Forms.TextBox txt_select;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TextBox txt_info;
     }
 }
 
