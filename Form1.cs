@@ -162,6 +162,7 @@ namespace FileManager
             if (list_fileList.SelectedItem == null) return;
             list_changedFileList.Items.Add(list_fileList.SelectedItem);
             list_fileList.Items.Remove(list_fileList.SelectedItem);
+            lb_selectNum.Text = "/已选择 " + list_changedFileList.Items.Count.ToString() + " 个文件";
         }
         //刷新文件列表
         private void btn_refreshFileList_Click(object sender, EventArgs e)
@@ -184,6 +185,7 @@ namespace FileManager
                 list_fileList.Items.Add(fi.FullName);
             }
             list_fileList.Sorted = true;
+            lb_allNum.Text = "共 "+list_fileList.Items.Count.ToString()+" 个文件";
         }
         //过滤文件
         private void btn_filter_Click(object sender, EventArgs e)

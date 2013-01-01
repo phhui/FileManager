@@ -59,6 +59,8 @@
             this.txt_select = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txt_info = new System.Windows.Forms.TextBox();
+            this.lb_allNum = new System.Windows.Forms.Label();
+            this.lb_selectNum = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // filePath
@@ -122,7 +124,7 @@
             // 
             // deleteFile
             // 
-            this.deleteFile.Location = new System.Drawing.Point(238, 528);
+            this.deleteFile.Location = new System.Drawing.Point(238, 542);
             this.deleteFile.Name = "deleteFile";
             this.deleteFile.Size = new System.Drawing.Size(46, 23);
             this.deleteFile.TabIndex = 11;
@@ -133,7 +135,7 @@
             // 
             // btn_mobileFile
             // 
-            this.btn_mobileFile.Location = new System.Drawing.Point(184, 528);
+            this.btn_mobileFile.Location = new System.Drawing.Point(184, 542);
             this.btn_mobileFile.Name = "btn_mobileFile";
             this.btn_mobileFile.Size = new System.Drawing.Size(48, 23);
             this.btn_mobileFile.TabIndex = 14;
@@ -178,7 +180,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 504);
+            this.checkBox1.Location = new System.Drawing.Point(9, 518);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBox1.Size = new System.Drawing.Size(48, 16);
@@ -188,7 +190,7 @@
             // 
             // txt_containsText
             // 
-            this.txt_containsText.Location = new System.Drawing.Point(63, 500);
+            this.txt_containsText.Location = new System.Drawing.Point(63, 514);
             this.txt_containsText.Name = "txt_containsText";
             this.txt_containsText.Size = new System.Drawing.Size(136, 21);
             this.txt_containsText.TabIndex = 19;
@@ -198,7 +200,7 @@
             // 
             // btn_filter
             // 
-            this.btn_filter.Location = new System.Drawing.Point(205, 499);
+            this.btn_filter.Location = new System.Drawing.Point(205, 513);
             this.btn_filter.Name = "btn_filter";
             this.btn_filter.Size = new System.Drawing.Size(49, 23);
             this.btn_filter.TabIndex = 20;
@@ -209,7 +211,7 @@
             // 
             // txt_newFileName
             // 
-            this.txt_newFileName.Location = new System.Drawing.Point(8, 527);
+            this.txt_newFileName.Location = new System.Drawing.Point(8, 541);
             this.txt_newFileName.Name = "txt_newFileName";
             this.txt_newFileName.Size = new System.Drawing.Size(107, 21);
             this.txt_newFileName.TabIndex = 21;
@@ -217,7 +219,7 @@
             // 
             // btn_reName
             // 
-            this.btn_reName.Location = new System.Drawing.Point(121, 527);
+            this.btn_reName.Location = new System.Drawing.Point(121, 541);
             this.btn_reName.Name = "btn_reName";
             this.btn_reName.Size = new System.Drawing.Size(57, 23);
             this.btn_reName.TabIndex = 22;
@@ -228,7 +230,7 @@
             // 
             // btn_addPrefix
             // 
-            this.btn_addPrefix.Location = new System.Drawing.Point(121, 584);
+            this.btn_addPrefix.Location = new System.Drawing.Point(121, 598);
             this.btn_addPrefix.Name = "btn_addPrefix";
             this.btn_addPrefix.Size = new System.Drawing.Size(54, 23);
             this.btn_addPrefix.TabIndex = 23;
@@ -239,7 +241,7 @@
             // 
             // btn_addSuffix
             // 
-            this.btn_addSuffix.Location = new System.Drawing.Point(180, 584);
+            this.btn_addSuffix.Location = new System.Drawing.Point(180, 598);
             this.btn_addSuffix.Name = "btn_addSuffix";
             this.btn_addSuffix.Size = new System.Drawing.Size(51, 23);
             this.btn_addSuffix.TabIndex = 24;
@@ -250,7 +252,7 @@
             // 
             // txt_order
             // 
-            this.txt_order.Location = new System.Drawing.Point(8, 556);
+            this.txt_order.Location = new System.Drawing.Point(8, 570);
             this.txt_order.Name = "txt_order";
             this.txt_order.Size = new System.Drawing.Size(107, 21);
             this.txt_order.TabIndex = 25;
@@ -258,7 +260,7 @@
             // 
             // txt_char
             // 
-            this.txt_char.Location = new System.Drawing.Point(8, 584);
+            this.txt_char.Location = new System.Drawing.Point(8, 598);
             this.txt_char.Name = "txt_char";
             this.txt_char.Size = new System.Drawing.Size(107, 21);
             this.txt_char.TabIndex = 26;
@@ -266,7 +268,7 @@
             // 
             // btn_allReName
             // 
-            this.btn_allReName.Location = new System.Drawing.Point(238, 556);
+            this.btn_allReName.Location = new System.Drawing.Point(238, 570);
             this.btn_allReName.Name = "btn_allReName";
             this.btn_allReName.Size = new System.Drawing.Size(75, 23);
             this.btn_allReName.TabIndex = 27;
@@ -277,7 +279,7 @@
             // 
             // txt_orderStartNum
             // 
-            this.txt_orderStartNum.Location = new System.Drawing.Point(121, 557);
+            this.txt_orderStartNum.Location = new System.Drawing.Point(121, 571);
             this.txt_orderStartNum.Name = "txt_orderStartNum";
             this.txt_orderStartNum.Size = new System.Drawing.Size(110, 21);
             this.txt_orderStartNum.TabIndex = 28;
@@ -285,7 +287,7 @@
             // 
             // txt_fileChar
             // 
-            this.txt_fileChar.Location = new System.Drawing.Point(8, 612);
+            this.txt_fileChar.Location = new System.Drawing.Point(8, 626);
             this.txt_fileChar.Name = "txt_fileChar";
             this.txt_fileChar.Size = new System.Drawing.Size(107, 21);
             this.txt_fileChar.TabIndex = 29;
@@ -293,7 +295,7 @@
             // 
             // txt_useChar
             // 
-            this.txt_useChar.Location = new System.Drawing.Point(121, 612);
+            this.txt_useChar.Location = new System.Drawing.Point(121, 626);
             this.txt_useChar.Name = "txt_useChar";
             this.txt_useChar.Size = new System.Drawing.Size(100, 21);
             this.txt_useChar.TabIndex = 30;
@@ -301,7 +303,7 @@
             // 
             // btn_replace
             // 
-            this.btn_replace.Location = new System.Drawing.Point(227, 610);
+            this.btn_replace.Location = new System.Drawing.Point(227, 624);
             this.btn_replace.Name = "btn_replace";
             this.btn_replace.Size = new System.Drawing.Size(75, 23);
             this.btn_replace.TabIndex = 31;
@@ -313,7 +315,7 @@
             // cb_contains
             // 
             this.cb_contains.AutoSize = true;
-            this.cb_contains.Location = new System.Drawing.Point(83, 34);
+            this.cb_contains.Location = new System.Drawing.Point(74, 37);
             this.cb_contains.Name = "cb_contains";
             this.cb_contains.Size = new System.Drawing.Size(84, 16);
             this.cb_contains.TabIndex = 32;
@@ -331,19 +333,39 @@
             // 
             // txt_info
             // 
-            this.txt_info.Location = new System.Drawing.Point(319, 504);
+            this.txt_info.Location = new System.Drawing.Point(319, 513);
             this.txt_info.Multiline = true;
             this.txt_info.Name = "txt_info";
             this.txt_info.ReadOnly = true;
             this.txt_info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_info.Size = new System.Drawing.Size(153, 143);
+            this.txt_info.Size = new System.Drawing.Size(153, 134);
             this.txt_info.TabIndex = 34;
+            // 
+            // lb_allNum
+            // 
+            this.lb_allNum.AutoSize = true;
+            this.lb_allNum.Location = new System.Drawing.Point(13, 494);
+            this.lb_allNum.Name = "lb_allNum";
+            this.lb_allNum.Size = new System.Drawing.Size(71, 12);
+            this.lb_allNum.TabIndex = 35;
+            this.lb_allNum.Text = "共 0 个文件";
+            // 
+            // lb_selectNum
+            // 
+            this.lb_selectNum.AutoSize = true;
+            this.lb_selectNum.Location = new System.Drawing.Point(106, 494);
+            this.lb_selectNum.Name = "lb_selectNum";
+            this.lb_selectNum.Size = new System.Drawing.Size(101, 12);
+            this.lb_selectNum.TabIndex = 36;
+            this.lb_selectNum.Text = "/已选择 0 个文件";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 659);
+            this.Controls.Add(this.lb_selectNum);
+            this.Controls.Add(this.lb_allNum);
             this.Controls.Add(this.txt_info);
             this.Controls.Add(this.txt_select);
             this.Controls.Add(this.cb_contains);
@@ -412,6 +434,8 @@
         private System.Windows.Forms.TextBox txt_select;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox txt_info;
+        private System.Windows.Forms.Label lb_allNum;
+        private System.Windows.Forms.Label lb_selectNum;
     }
 }
 
