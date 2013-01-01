@@ -22,7 +22,7 @@ namespace FileManager
         {
             InitializeComponent();
         }
-        public List<FileInfo> GetAllFilesInDirectory(string strDirectory)
+        public List<FileInfo> GetAllFilesInDirectory(string strDirectory,Boolean contains)
         {
             if(!Directory.Exists(strDirectory)){
                 MessageBox.Show("请选择有效目录！");
@@ -32,9 +32,12 @@ namespace FileManager
             DirectoryInfo[] directoryArray = directory.GetDirectories();
             FileInfo[] fileInfoArray = directory.GetFiles();
             if (fileInfoArray.Length > 0) fileListData.AddRange(fileInfoArray);
-            foreach (DirectoryInfo _directoryInfo in directoryArray)
-            {//遍历子目录
-                GetAllFilesInDirectory(_directoryInfo.FullName);
+            if (contains)
+            {
+                foreach (DirectoryInfo _directoryInfo in directoryArray)
+                {//遍历子目录
+                    GetAllFilesInDirectory(_directoryInfo.FullName,contains);
+                }
             }
             return fileListData;
         }
@@ -167,7 +170,7 @@ namespace FileManager
         {
             fileListData = new List<FileInfo>();
             list_fileList.Items.Clear();
-            GetAllFilesInDirectory(filePath.Text);
+            GetAllFilesInDirectory(filePath.Text,cb_contains.Checked);
             showFileList();
         }
         //将文件列表添加到显示列表中
@@ -388,6 +391,17 @@ namespace FileManager
             foreach (string nf in newFile)
             {
                 list_changedFileList.Items.Add(nf);
+            }
+        }
+
+        private void filePath_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fb = new FolderBrowserDialog();
+            if (fb.ShowDialog() == DialogResult.OK)
+            {
+                list_changedFileList.Items.Clear();
+                filePath.Text = fb.SelectedPath;
+                readFileList();
             }
         }
     }

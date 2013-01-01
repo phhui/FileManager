@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.filePath = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.autoClassification = new System.Windows.Forms.Button();
             this.list_fileList = new System.Windows.Forms.ListBox();
@@ -56,24 +55,18 @@
             this.txt_fileChar = new System.Windows.Forms.TextBox();
             this.txt_useChar = new System.Windows.Forms.TextBox();
             this.btn_replace = new System.Windows.Forms.Button();
+            this.cb_contains = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // filePath
             // 
             this.filePath.Location = new System.Drawing.Point(53, 9);
             this.filePath.Name = "filePath";
+            this.filePath.ReadOnly = true;
             this.filePath.Size = new System.Drawing.Size(257, 21);
             this.filePath.TabIndex = 2;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(316, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "选择目录";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.filePath.Text = "点击选择目录";
+            this.filePath.Click += new System.EventHandler(this.filePath_Click);
             // 
             // label1
             // 
@@ -311,11 +304,22 @@
             this.btn_replace.UseVisualStyleBackColor = true;
             this.btn_replace.Click += new System.EventHandler(this.btn_replace_Click);
             // 
+            // cb_contains
+            // 
+            this.cb_contains.AutoSize = true;
+            this.cb_contains.Location = new System.Drawing.Point(313, 12);
+            this.cb_contains.Name = "cb_contains";
+            this.cb_contains.Size = new System.Drawing.Size(84, 16);
+            this.cb_contains.TabIndex = 32;
+            this.cb_contains.Text = "包含子目录";
+            this.cb_contains.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 636);
+            this.Controls.Add(this.cb_contains);
             this.Controls.Add(this.btn_replace);
             this.Controls.Add(this.txt_useChar);
             this.Controls.Add(this.txt_fileChar);
@@ -341,7 +345,6 @@
             this.Controls.Add(this.list_fileList);
             this.Controls.Add(this.autoClassification);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.filePath);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -355,7 +358,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox filePath;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button autoClassification;
         private System.Windows.Forms.ListBox list_fileList;
@@ -381,6 +383,7 @@
         private System.Windows.Forms.TextBox txt_fileChar;
         private System.Windows.Forms.TextBox txt_useChar;
         private System.Windows.Forms.Button btn_replace;
+        private System.Windows.Forms.CheckBox cb_contains;
     }
 }
 
