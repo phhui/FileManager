@@ -58,13 +58,6 @@ namespace FileManager
             //自动归类
             MessageBox.Show("sorry this feature is not implemented!");
         }
-        //取消选择
-        private void changedFileList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (list_changedFileList.SelectedItem==null) return;
-            list_fileList.Items.Add(list_changedFileList.SelectedItem);
-            list_changedFileList.Items.Remove(list_changedFileList.SelectedItem);
-        }
         //
         private void deleteFile_Click(object sender, EventArgs e)
         {
@@ -87,6 +80,11 @@ namespace FileManager
             {
                 if (File.Exists(path))
                 {
+                    if (IsUsed(path))
+                    {
+                        MessageBox.Show("文件正在使用中，无法进行操作！");
+                        continue;
+                    }
                     File.Delete(path);
                     deleteNum++;
                 }
@@ -95,15 +93,14 @@ namespace FileManager
             MessageBox.Show("文件删除成功，总共"+deleteNum.ToString()+"个文件被删除！");
             deleteNum = 0;
         }
-
-        private void textBox1_Click(object sender, EventArgs e)
-        {
-
-            
-        }
         //移动文件
         private void btn_mobileFile_Click(object sender, EventArgs e)
         {
+            if (list_changedFileList.Items.Count < 1)
+            {
+                MessageBox.Show("请先选择文件！");
+                return;
+            }
             DialogResult res = MessageBox.Show("您确定要移动选择列表中的所有文件？","提示",MessageBoxButtons.YesNo);
             if (res != DialogResult.Yes) return;
             FolderBrowserDialog fb = new FolderBrowserDialog();
@@ -127,6 +124,11 @@ namespace FileManager
             {
                 if (File.Exists(path))
                 {
+                    if (IsUsed(path))
+                    {
+                        MessageBox.Show("文件正在使用中，无法进行操作！");
+                        continue;
+                    }
                     string filename=path.Substring(path.LastIndexOf("\\"));
                     if (!File.Exists(mobilePath + filename))
                     {
@@ -180,6 +182,7 @@ namespace FileManager
             {
                 list_fileList.Items.Add(fi.FullName);
             }
+            list_fileList.Sorted = true;
         }
         //过滤文件
         private void btn_filter_Click(object sender, EventArgs e)
@@ -231,6 +234,11 @@ namespace FileManager
 
         private void btn_reName_Click(object sender, EventArgs e)
         {
+            if (list_changedFileList.Items.Count < 1)
+            {
+                MessageBox.Show("请先选择文件！");
+                return;
+            }
             if (list_changedFileList.Items.Count > 1)
             {
                 MessageBox.Show("重命名只能对单个文件重命名！如需对多个文件重命名请使用序列重命名！");
@@ -252,6 +260,11 @@ namespace FileManager
         }
         private void reName(string file,string newName,Boolean check)
         {
+            if (IsUsed(file))
+            {
+                MessageBox.Show("文件正在使用中，无法进行操作！");
+                return;
+            }
             string filePath = file.Substring(0, list_changedFileList.Items[0].ToString().LastIndexOf("\\") + 1);
             string filename = file.Substring(file.LastIndexOf("\\") + 1);
             string type = filename.Substring(filename.LastIndexOf("."));
@@ -276,6 +289,10 @@ namespace FileManager
             {
                 MessageBox.Show("请输入序列名字！");
                 return;
+            }
+            if (txt_orderStartNum.Text == "起始数字(默认为0)")
+            {
+                txt_orderStartNum.Text = "0";
             }
             int a = 0;
             if (!int.TryParse(txt_orderStartNum.Text,out a))
@@ -403,6 +420,112 @@ namespace FileManager
                 filePath.Text = fb.SelectedPath;
                 readFileList();
             }
+        }
+
+        private void list_changedFileList_DoubleClick(object sender, EventArgs e)
+        {
+            if (list_changedFileList.SelectedItem == null) return;
+            list_fileList.Items.Add(list_changedFileList.SelectedItem);
+            list_changedFileList.Items.Remove(list_changedFileList.SelectedItem);
+        }
+
+        private void list_fileList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (list_fileList.SelectedItem == null) return;
+            txt_select.Text = list_fileList.SelectedItem.ToString();
+        }
+
+        private void list_changedFileList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (list_changedFileList.SelectedItem == null) return;
+            txt_select.Text = list_changedFileList.SelectedItem.ToString();
+        }
+
+        public bool IsUsed(String fileName)
+        {
+            bool result = false;
+
+            try
+            {
+                FileStream fs = File.OpenWrite(fileName);
+                fs.Close();
+            }
+            catch
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        private void btn_filter_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_filter, "过滤文件列表中的文件");
+        }
+
+        private void btn_changeAll_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_changeAll, "将文件列表中的所有文件移到选择列表中");
+        }
+
+        private void btn_refreshFileList_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_refreshFileList, "刷新文件列表中的文件");
+        }
+
+        private void btn_clearChange_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_clearChange, "清空选择列表");
+        }
+
+        private void btn_reName_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_reName, "重命名选择列表的文件，只能重命名一个文件，\r\n如果需要修改多个文件请使用批量重命名");
+        }
+
+        private void btn_mobileFile_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_mobileFile, "将选择的文件移动到指定目录，点击选择目标目录并移动");
+        }
+
+        private void deleteFile_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(deleteFile, "删除选择列表中的所有文件");
+        }
+
+        private void btn_allReName_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_allReName, "对选择列表中的所有文件按设置规则进行便命名，\r\n如：选择100张jpg图片，序列名为a，起始数字为0，\r\n则重命名后的文件名为（a0.jpg, a1.jpg, a2.jpg, a3.jpg ......）");
+        }
+
+        private void btn_addPrefix_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_addPrefix, "将选择列表中的所有文件的名字前面加上一串文字，\r\n如：文件ww.rar,字符串填aaa，则选择的文件加完后都变成 aaaww.rar");
+        }
+
+        private void btn_addSuffix_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_addSuffix, "将选择列表中的所有文件的名字的末尾加上一串文字，\r\n如：文件ww.rar,字符串填aaa，则选择的文件加完后都变成 wwaaa.rar");
+        }
+
+        private void btn_replace_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(btn_replace, "将选择列表中的所有文件的名字中包含的字符替换成自己需要的，\r\n如：aa天啊bb.rar，要替换的字符为 “天啊”，\r\n替换后的字符为“cc”，则执行替换后文件名为 aaccbb.rar");
+        }
+
+        private void txt_containsText_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(txt_containsText, "文件名中包含或不包含的文字");
+        }
+
+        private void cb_contains_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(cb_contains, "选中后将会显示所选的目录及基子目录下的所有文件");
+        }
+
+        private void cb_contains_CheckedChanged(object sender, EventArgs e)
+        {
+            list_changedFileList.Items.Clear();
+            readFileList();
         }
     }
 }
